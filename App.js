@@ -1,10 +1,39 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Switch } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Switch,
+  TouchableWithoutFeedback,
+  Image,
+  SafeAreaView,
+  StatusBar,
+  TextInput,
+} from "react-native";
 
 const App = () => {
   const [input, setInput] = useState("0");
 
+  const [inputLimit, setInputLimit] = useState(10);
+
   const [isDarkModeEnabled, setDarkModeEnabled] = useState(false);
+
+  const statusBarHeight = StatusBar.currentHeight;
+
+  const handleTextChange = (text) => {
+    if (text.length <= inputLimit) {
+      setInput(text);
+    }
+  };
+
+  useEffect(() => {
+    if (isDarkModeEnabled) {
+      StatusBar.setBarStyle("dark-content");
+    } else {
+      StatusBar.setBarStyle("dark-content");
+    }
+  }, [isDarkModeEnabled]);
 
   const handlePress = (value) => {
     if (value === "C") {
@@ -36,21 +65,22 @@ const App = () => {
     setInput(input + value);
   };
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
         { backgroundColor: isDarkModeEnabled ? "#393636" : "#d7e2e7" },
       ]}
     >
-      <Text
+      <TextInput
         style={[
           styles.inputValue,
           { color: isDarkModeEnabled ? "#fff" : "#000" },
         ]}
-        maxLength={13}
+        onChangeText={handleTextChange}
+        maxLength={inputLimit}
       >
         {input}
-      </Text>
+      </TextInput>
 
       <View
         style={[
@@ -239,7 +269,31 @@ const App = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <Text
+      <TouchableWithoutFeedback
+        onPress={() => setDarkModeEnabled(!isDarkModeEnabled)}
+        style={styles.switch}
+      >
+        <Image
+          source={
+            isDarkModeEnabled
+              ? require("./assets/light-mode.png")
+              : require("./assets/dark-mode.png")
+          }
+          style={{
+            width: 42,
+            height: 42,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            marginLeft: 15,
+            marginTop: 15,
+          }}
+        />
+      </TouchableWithoutFeedback>
+
+      {/* 
+                 Dark mode - Light mode text
+     <Text
         style={[
           styles.darkModeText,
           { color: isDarkModeEnabled ? "#6cb2d8" : "#165476" },
@@ -247,15 +301,16 @@ const App = () => {
       >
         {isDarkModeEnabled ? "Light Mode" : "Dark Mode"}
       </Text>
-      <Switch
+                Dark mode - Light mode Swtich
+       <Switch
         value={isDarkModeEnabled}
         onValueChange={(value) => setDarkModeEnabled(value)}
         trackColor={{ false: "#165476", true: "#6cb2d8" }}
         thumbColor={isDarkModeEnabled ? "#fff" : "#5d7474"}
         ios_backgroundColor="#f9f9f9"
         style={styles.switch}
-      />
-    </View>
+      /> */}
+    </SafeAreaView>
   );
 };
 
@@ -272,6 +327,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#1b1919",
+    marginTop: StatusBar.currentHeight,
   },
   inputValue: {
     fontSize: 50,
