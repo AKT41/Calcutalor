@@ -1,4 +1,6 @@
-# React Native Calculator App
+# <h1 align:center> React Native Calculator App</h1>
+
+
 
 This is a simple calculator app built with React Native. It is a simple app that can perform basic arithmetic operations.
 
