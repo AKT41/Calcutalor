@@ -1,4 +1,4 @@
-# <h1 align:center> React Native Calculator App</h1>
+<h1 align:center> React Native Calculator App</h1>
 
 
 
