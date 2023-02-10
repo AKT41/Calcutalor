@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Switch,
   TouchableWithoutFeedback,
   Image,
   SafeAreaView,
@@ -21,19 +20,22 @@ const App = () => {
 
   const statusBarHeight = StatusBar.currentHeight;
 
+  const limitedInput = input.length > 16 ? "max. number" : input;
+
   const handleTextChange = (text) => {
     if (text.length <= inputLimit) {
       setInput(text);
     }
   };
 
-  useEffect(() => {
-    if (isDarkModeEnabled) {
-      StatusBar.setBarStyle("dark-content");
-    } else {
-      StatusBar.setBarStyle("dark-content");
-    }
-  }, [isDarkModeEnabled]);
+  // useEffect(() => {
+  //   if (isDarkModeEnabled) {
+  //     StatusBar.setBarStyle("dark-content");
+
+  //   } else {
+  //     StatusBar.setBarStyle("light-content");
+  //   }
+  // }, [isDarkModeEnabled]);
 
   const handlePress = (value) => {
     if (value === "C") {
@@ -68,24 +70,29 @@ const App = () => {
     <SafeAreaView
       style={[
         styles.container,
-        { backgroundColor: isDarkModeEnabled ? "#393636" : "#d7e2e7" },
+        { backgroundColor: isDarkModeEnabled ? "#000" : "#d7e2e7" },
       ]}
     >
-      <TextInput
+      <StatusBar
+        barStyle={isDarkModeEnabled ? "light-content" : "dark-content"}
+        backgroundColor={isDarkModeEnabled ? "#000" : "#d7e2e7"}
+      />
+      <Text
         style={[
           styles.inputValue,
           { color: isDarkModeEnabled ? "#fff" : "#000" },
+          input.length >= 13 ? { fontSize: 40 } : {},
         ]}
         onChangeText={handleTextChange}
-        maxLength={inputLimit}
       >
-        {input}
-      </TextInput>
+        {limitedInput}
+        {/* {input}  */}
+      </Text>
 
       <View
         style={[
           styles.buttonsContainer,
-          { backgroundColor: isDarkModeEnabled ? "#000" : "#93bacd" },
+          { backgroundColor: isDarkModeEnabled ? "#393636" : "#93bacd" },
         ]}
       >
         <TouchableOpacity
@@ -327,7 +334,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#1b1919",
-    marginTop: StatusBar.currentHeight,
+    // marginTop: StatusBar.currentHeight,
   },
   inputValue: {
     fontSize: 50,
