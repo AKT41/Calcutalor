@@ -13,8 +13,8 @@ Run `npm start` to start the app.
 ## Screenshots
 <p>
   <span>Light Mode</span>
-<img src="https://user-images.githubusercontent.com/109578564/218256373-47724aac-cb7e-4b16-b484-e38639b44d51.jpg" width="400"/>
+<img src="https://user-images.githubusercontent.com/109578564/218256373-47724aac-cb7e-4b16-b484-e38639b44d51.jpg" width="400" height="50%"/>
   <span>Dark Mode</span>
-<img src="https://user-images.githubusercontent.com/109578564/218256375-57062cf5-2916-4521-8199-b1c3f9c3b82c.jpg" width="400" />
+<img src="https://user-images.githubusercontent.com/109578564/218256375-57062cf5-2916-4521-8199-b1c3f9c3b82c.jpg" width="400" height="50%" />
 
 </p>
